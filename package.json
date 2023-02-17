@@ -1,0 +1,17 @@
+{
+  "name": "zds",
+  "version": "1.0.0",
+  "description": "desktop client for ZeroDocSigner WEB API",
+  "main": "main.js",
+  "scripts": {
+    "start": "copy pages\\* dist\\pages && copy styles\\* dist\\styles && .\\node_modules\\.bin\\tsc && electron dist/App.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dmitry-ship-it",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/electron": "^1.6.10",
+    "axios": "^1.2.1",
+    "typescript": "^4.9.4"
+  }
+}
