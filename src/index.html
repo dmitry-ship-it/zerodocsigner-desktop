@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ZeroDocSigner</title>
+  </head>
+  <body>
+    <div class="container">
+      <form id="main-form">
+        <img class="logo" src="../assets/vsu_logo.png" alt="vsu-logo" />
+        <div class="grid-row">
+          <label for="signature-type">Тип подписи</label>
+          <select class="form-input" id="signature-type" name="signature-type">
+            <option value="visible" selected>Стандартная</option>
+            <option value="invisible">Универсальная</option>
+          </select>
+        </div>
+        <fieldset class="grid grid-row" id="basic-signature" disabled hidden>
+          <legend class="grid-row">Невидимая подпись</legend>
+          <div class="grid-row input-row">
+            <label for="signer">Должность: </label>
+            <input class="form-input" type="text" id="signer" name="signer" required />
+          </div>
+          <div class="grid-row" id="force-block">
+            <label for="force">Переподписать</label>
+            <input class="form-input" type="checkbox" id="force" name="force" />
+          </div>
+        </fieldset>
+        <fieldset class="grid grid-row" id="advanced-signature">
+          <legend class="grid-row">Видимая подпись (доступно для .docx, .xlsx, .pptx)</legend>
+          <div class="grid-row input-row">
+            <label for="commitment-type">Тип подтверждения: </label>
+            <select class="form-input" id="commitment-type" name="commitment-type" required>
+              <option value="created-approved">Создал и утвердил данный документ</option>
+              <option value="approved">Утвердил данный документ</option>
+              <option value="created">Создал данный документ</option>
+            </select>
+          </div>
+          <div class="grid-row input-row">
+            <label for="signature-comments">Цель подписания: </label>
+            <input class="form-input" type="text" name="signature-comments" id="signature-comments" required />
+          </div>
+          <div class="grid-row input-row">
+            <label for="signer-role">Роль или должность: </label>
+            <input class="form-input" type="text" name="signer-role" id="signer-role" required />
+          </div>
+          <div id="advanced-signature-more" hidden>
+            <div class="grid-row input-row">
+              <label for="address-primary">Адрес: </label>
+              <input class="form-input" type="text" name="address-primary" id="address-primary" value="Московский проспект" required />
+            </div>
+            <div class="grid-row input-row">
+              <label for="address-secondary">Адрес (2): </label>
+              <input class="form-input" type="text" name="address-secondary" id="address-secondary" value="33" required />
+            </div>
+            <div class="grid-row input-row">
+              <label for="city">Город: </label>
+              <input class="form-input" type="text" name="city" id="city" value="Витебск" required />
+            </div>
+            <div class="grid-row input-row">
+              <label for="state-or-province">Область или край: </label>
+              <input class="form-input" type="text" name="state-or-province" id="state-or-province" value="Витебская область" required />
+            </div>
+            <div class="grid-row input-row">
+              <label for="postal-code">Почтовый индекс: </label>
+              <input class="form-input" type="text" name="postal-code" id="postal-code" value="210038" required />
+            </div>
+            <div class="grid-row input-row">
+              <label for="country-name">Страна или регион: </label>
+              <input class="form-input" type="text" name="country-name" id="country-name" value="Республика Беларусь" required />
+            </div>
+          </div>
+          <button class="more-button" id="advanced-signature-more-button" type="button">Больше...</button>
+        </fieldset>
+        <div class="grid-row">
+          <input class="form-input" type="file" id="file" name="file" required />
+        </div>
+        <div class="grid-row">
+          <span class="text-green grid-col" id="file-status"> </span>
+        </div>
+        <div class="grid-row">
+          <button class="button-main" type="submit" id="send">Подписать</button>
+          <button class="button-check" type="submit" id="check" hidden>Проверить подпись</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

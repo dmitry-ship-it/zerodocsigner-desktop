@@ -1,0 +1,173 @@
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: large;
+}
+
+#main-form {
+  display: grid;
+  place-items: center;
+  grid-gap: 20px;
+  border-style: solid;
+  border-width: 0px;
+  border-radius: 10px;
+  padding: 30px;
+  background-color: #e0e0e0;
+}
+
+/* file */
+
+#file {
+  border: none;
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  color: #333;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 24rem;
+  transition-property: background-color, outline, box-shadow;
+  transition-duration: 1s;
+  transition-timing-function: ease;
+}
+
+#file:hover {
+  background-color: #e8e8e8;
+}
+
+#file:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#file::file-selector-button {
+  padding: 10px 20px;
+  background-color: green;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 1s ease;
+}
+
+#file::file-selector-button:hover {
+  background-color: darkgreen;
+}
+
+/* file end */
+
+.container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  width: fit-content;
+}
+
+.text-good {
+  color: green;
+}
+
+.text-alert {
+  color: red;
+}
+
+/* new styles */
+
+body {
+  background-color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 95vh;
+}
+
+.logo {
+  padding: 20px;
+}
+
+.button-main {
+  border-width: 0;
+  border-radius: 5px;
+  color: white;
+  background-color: #0f6fc5;
+  line-height: 2;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: background-color 1s ease;
+}
+
+.button-main:hover {
+  background-color: #6b21a8;
+}
+
+.button-check {
+  border-width: 0;
+  border-radius: 5px;
+  color: white;
+  background-color: #0f6fc5;
+  line-height: 2;
+  padding-left: 20px;
+  padding-right: 20px;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: background-color 1s ease;
+}
+
+.button-check:hover {
+  background-color: #86198f;
+}
+
+.grid {
+  min-width: 450px;
+  border-radius: 10px;
+}
+
+.input-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+label {
+  padding-left: 0.1rem;
+}
+
+.more-button {
+  border: 0;
+  background-color: transparent;
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.form-input {
+  line-height: 1.5;
+  border: solid 1px #ccc;
+  border-radius: 7px;
+  /* padding-left: 0.2rem;
+  padding-right: 0.2rem; */
+  padding: 0.2rem;
+  transition: background-color 1s ease;
+}
+
+.form-input:hover {
+  background-color: #f0f0f0;
+}
+
+#basic-signature,
+#advanced-signature {
+  border: 0;
+}
+
+#basic-signature legend,
+#advanced-signature legend {
+  display: none;
+}
