@@ -1,21 +1,31 @@
-import { DataModel, OfficeSignatureInfo, SignModel } from "./types";
+import { AnySignatureInfo, DocumentModel, OfficeSignatureInfo, OpenSignatureInfo, PdfSignatureInfo } from "./types";
 
 export default class HttpClient {
   private static defaultRoute = "https://localhost:7008/";
 
-  public static async sign(model: SignModel) {
-    return await this.post(model, "sign");
+  public static async signOfficeDocument(model: OfficeSignatureInfo) {
+    return await this.post(model, "api/v2/sign/office");
   }
 
-  public static async signAdvanced(model: OfficeSignatureInfo) {
-    return await this.post(model, "api/v2/sign");
+  public static async signOpenDocument(model: OpenSignatureInfo) {
+    return await this.post(model, "api/v2/sign/open");
   }
 
-  public static async verify(model: DataModel) {
-    return await this.post(model, "verify");
+  public static async signPdfDocument(model: PdfSignatureInfo) {
+    return await this.post(model, "api/v2/sign/pdf");
   }
 
-  private static async post(model: object, route: string) {
+  public static async signAnyDocument(model: AnySignatureInfo) {
+    return await this.post(model, "api/v2/sign/any");
+  }
+
+  public static async verify(model: DocumentModel) {
+    return await this.post(model, "api/v2/verify");
+  }
+
+  private static async post<T>(model: T, route: string) {
+    console.log(model);
+
     const response = await fetch(this.defaultRoute + route, {
       body: JSON.stringify(model),
       method: "POST",
@@ -24,6 +34,6 @@ export default class HttpClient {
       },
     });
 
-    return await response.text();
+    return await response.json();
   }
 }

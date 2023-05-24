@@ -16,7 +16,7 @@
 
 /* file */
 
-#file {
+#document {
   border: none;
   border-radius: 5px;
   background-color: #f2f2f2;
@@ -32,16 +32,16 @@
   transition-timing-function: ease;
 }
 
-#file:hover {
+#document:hover {
   background-color: #e8e8e8;
 }
 
-#file:focus {
+#document:focus {
   outline: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-#file::file-selector-button {
+#document::file-selector-button {
   padding: 10px 20px;
   background-color: green;
   color: #fff;
@@ -52,7 +52,7 @@
   transition: background-color 1s ease;
 }
 
-#file::file-selector-button:hover {
+#document::file-selector-button:hover {
   background-color: darkgreen;
 }
 
@@ -103,6 +103,11 @@ body {
 
 .button-main:hover {
   background-color: #6b21a8;
+}
+
+.button-main:disabled {
+  background-color: gray;
+  cursor: default;
 }
 
 .button-check {
