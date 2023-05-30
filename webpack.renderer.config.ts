@@ -8,7 +8,7 @@ rules.push({
   loader: "file-loader",
   options: {
     name: "[name].[ext]",
-    publicPath: "assets/",
+    publicPath: "../assets/",
     outputPath: "assets/",
   },
 });

@@ -19,6 +19,7 @@ export default function Form() {
   const [signatureType, setSignatureType] = React.useState("visible");
   const [fileExtension, setFileExtension] = React.useState("");
   const [isFileValid, setIsFileValid] = React.useState(true);
+  const formRef = React.createRef<HTMLFormElement>();
   const sendButtonRef = React.createRef<HTMLButtonElement>();
   const checkButtonRef = React.createRef<HTMLButtonElement>();
 
@@ -35,20 +36,33 @@ export default function Form() {
   };
 
   const signFile = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    const form = document.getElementById("main-form") as HTMLFormElement;
+    e.preventDefault();
+
+    // clear custom validation messages before form validation
+    if (sendButtonRef.current) sendButtonRef.current.setCustomValidity("");
+    if (checkButtonRef.current) checkButtonRef.current.setCustomValidity("");
+
+    // check form ref and validate form
+    const form = formRef.current;
+    if (!form) return;
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
 
-    e.preventDefault();
-    const formData = new FormData(form, e.currentTarget);
+    // collect form data
+    const formData = new FormData(form);
 
-    if (signatureType !== "visible") reportSavedFile(await signAnyFile(formData), sendButtonRef.current);
-    else if (officeFileExtensions.includes(fileExtension.toLowerCase())) reportSavedFile(await signOfficeFile(formData), sendButtonRef.current);
-    else if (openFileExtensions.includes(fileExtension.toLowerCase())) reportSavedFile(await signOpenFile(formData), sendButtonRef.current);
-    else if (pdfFileExtension === fileExtension.toLowerCase()) reportSavedFile(await signPdfFile(formData), sendButtonRef.current);
-    else reportWrongFileExtension(sendButtonRef.current);
+    // send request and display message as validity message of submit button
+    try {
+      if (signatureType !== "visible") reportSavedFile(await signAnyFile(formData), sendButtonRef.current);
+      else if (officeFileExtensions.includes(fileExtension.toLowerCase())) reportSavedFile(await signOfficeFile(formData), sendButtonRef.current);
+      else if (openFileExtensions.includes(fileExtension.toLowerCase())) reportSavedFile(await signOpenFile(formData), sendButtonRef.current);
+      else if (pdfFileExtension === fileExtension.toLowerCase()) reportSavedFile(await signPdfFile(formData), sendButtonRef.current);
+      else reportWrongFileExtension(sendButtonRef.current);
+    } catch (e) {
+      alert((e as Error).message);
+    }
   };
 
   const checkSignature = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -64,7 +78,7 @@ export default function Form() {
   };
 
   return (
-    <form id="main-form">
+    <form id="main-form" ref={formRef}>
       <img className="logo" src={logo} alt="vsu-logo" />
       <div className="grid-row">
         <label htmlFor="signature-type">Тип подписи</label>

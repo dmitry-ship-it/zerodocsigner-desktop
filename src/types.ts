@@ -41,3 +41,12 @@ export interface AnyDocumentVerifyResult {
   signerRole: string;
   commitmentType: string;
 }
+
+export interface LoginModel {
+  userName: string;
+  password: string;
+}
+
+export interface Jwt {
+  value: string;
+}
