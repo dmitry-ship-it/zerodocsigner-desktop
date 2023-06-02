@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function FormSetForInvisible() {
-  const [moreBlockVisible, setMoreBlockVisible] = useState(true);
+  const [moreBlockVisible, setMoreBlockVisible] = React.useState(true);
 
   return (
     <fieldset className="grid grid-row" id="basic-signature">

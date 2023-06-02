@@ -143,3 +143,9 @@ export const validateAllSignatures = async (file: File) => {
 
   alert(message.substring(0, message.length - 2));
 };
+
+export class RequestError extends Error {
+  constructor(message: string, public statusCode: number) {
+    super(message);
+  }
+}

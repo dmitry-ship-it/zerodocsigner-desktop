@@ -2,6 +2,7 @@ import React from "react";
 import FormSetForInvisible from "./FormSetForInvisible";
 import FormSetForVisible from "./FormSetForVisible";
 import {
+  RequestError,
   officeFileExtensions,
   openFileExtensions,
   pdfFileExtension,
@@ -15,7 +16,7 @@ import {
 } from "./helpers";
 import logo from "../assets/vsu_logo.png";
 
-export default function Form() {
+export default function Form(ctx: { setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [signatureType, setSignatureType] = React.useState("visible");
   const [fileExtension, setFileExtension] = React.useState("");
   const [isFileValid, setIsFileValid] = React.useState(true);
@@ -61,7 +62,10 @@ export default function Form() {
       else if (pdfFileExtension === fileExtension.toLowerCase()) reportSavedFile(await signPdfFile(formData), sendButtonRef.current);
       else reportWrongFileExtension(sendButtonRef.current);
     } catch (e) {
-      alert((e as Error).message);
+      if (e instanceof RequestError) {
+        if (e.statusCode === 401) ctx.setIsLoggedIn(false);
+        alert(e.message);
+      }
     }
   };
 
@@ -81,7 +85,7 @@ export default function Form() {
     <form id="main-form" ref={formRef}>
       <img className="logo" src={logo} alt="vsu-logo" />
       <div className="grid-row">
-        <label htmlFor="signature-type">Тип подписи</label>
+        <label htmlFor="signature-type">Тип подписи </label>
         <select className="form-input" id="signature-type" name="signature-type" onChange={(e) => setSignatureType(e.target.value)}>
           <option value="visible">Стандартная</option>
           <option value="invisible">Универсальная</option>
@@ -90,11 +94,6 @@ export default function Form() {
       {signatureType !== "visible" ? <FormSetForInvisible /> : <FormSetForVisible fileExtension={fileExtension} setIsFileValid={setIsFileValid} />}
       <div className="grid-row">
         <input className="form-input document-input" type="file" id="document" name="document" onChange={changeFileExtension} required />
-      </div>
-      <div className="grid-row">
-        <span className="text-green grid-col" id="file-status">
-          {" "}
-        </span>
       </div>
       <div className="grid-row">
         <button

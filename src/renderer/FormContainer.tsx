@@ -5,5 +5,5 @@ import LoginForm from "./LoginForm";
 export default function FormContainer() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
 
-  return <div className="container">{isLoggedIn ? <Form /> : <LoginForm setIsLoggedIn={setIsLoggedIn} />}</div>;
+  return <div className="container">{isLoggedIn ? <Form setIsLoggedIn={setIsLoggedIn} /> : <LoginForm setIsLoggedIn={setIsLoggedIn} />}</div>;
 }

@@ -7,7 +7,10 @@ export default function LoginForm(ctx: { setIsLoggedIn: React.Dispatch<React.Set
   const handleLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     if (!formRef.current) return;
-    if (!formRef.current.checkValidity()) formRef.current.reportValidity();
+    if (!formRef.current.checkValidity()) {
+      formRef.current.reportValidity();
+      return;
+    }
 
     const formData = new FormData(formRef.current);
     const isLoggedIn = await HttpClient.login({
@@ -28,6 +31,7 @@ export default function LoginForm(ctx: { setIsLoggedIn: React.Dispatch<React.Set
         Пароль
         <input className="form-input" name="password" type="password" required />
       </label>
+      <br />
       <button className="button-main" type="submit" onClick={handleLogin}>
         Войти
       </button>

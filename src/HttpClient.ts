@@ -1,3 +1,4 @@
+import { RequestError } from "./renderer/helpers";
 import { AnySignatureInfo, DocumentModel, Jwt, LoginModel, OfficeSignatureInfo, OpenSignatureInfo, PdfSignatureInfo } from "./types";
 
 export default class HttpClient {
@@ -41,9 +42,9 @@ export default class HttpClient {
       },
     });
 
-    if (response.status === 401) throw Error("Вы не авторизованы в системе");
-    if (response.status === 400) throw Error("Произошла ошибка при подписании");
-    if (!response.ok) throw Error("Ошибка при отправке запроса");
+    if (response.status === 401) throw new RequestError("Вы не авторизованы в системе", response.status);
+    if (response.status === 400) throw new RequestError("Вы не можете подписывать электронные документы", response.status);
+    if (!response.ok) throw new RequestError("Ошибка при подписании документа", response.status);
 
     return await response.json();
   }
