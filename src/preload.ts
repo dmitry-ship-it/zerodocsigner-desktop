@@ -3,7 +3,7 @@
 
 import { IpcRendererEvent, contextBridge, ipcRenderer } from "electron";
 
-export type Channels = "save_file";
+export type Channels = "save_file" | "show_message";
 
 const electronHandler = {
   ipcRenderer: {

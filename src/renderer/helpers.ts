@@ -124,7 +124,7 @@ export const validateAllSignatures = async (file: File) => {
   })) as AnyDocumentVerifyResult[];
 
   if (result.length === 0) {
-    alert("Подписи не нейдены.");
+    (window as any).electron.ipcRenderer.sendMessage("show_message", ["Подписи не найдены."]);
     return;
   }
 
@@ -133,6 +133,7 @@ export const validateAllSignatures = async (file: File) => {
     message += item.isValid ? "====== Подпись действительна ======\n" : "====== !! Подпись недействительна ======\n";
     message += "Тип подтверждения: " + item.commitmentType + "\n";
     message += "Цель подписания: " + item.signatureComments + "\n";
+    message += "Роль или должность: " + item.signerRole + "\n";
     message += "Адрес: " + item.addressPrimary + "\n";
     message += "Адрес (2): " + item.addressSecondary + "\n";
     message += "Город: " + item.city + "\n";
@@ -141,7 +142,7 @@ export const validateAllSignatures = async (file: File) => {
     message += "Страна: " + item.countryName + "\n\n";
   }
 
-  alert(message.substring(0, message.length - 2));
+  (window as any).electron.ipcRenderer.sendMessage("show_message", [message.substring(0, message.length - 2)]);
 };
 
 export class RequestError extends Error {

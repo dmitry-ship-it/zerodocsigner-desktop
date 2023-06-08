@@ -4,7 +4,7 @@ export default function FormSetForInvisible() {
   const [moreBlockVisible, setMoreBlockVisible] = React.useState(true);
 
   return (
-    <fieldset className="grid grid-row" id="basic-signature">
+    <fieldset className="grid grid-row" id="basic-signature" disabled={false}>
       <legend className="grid-row">Видимая подпись</legend>
       <div className="grid-row input-row">
         <label htmlFor="commitment-type">Тип подтверждения: </label>
